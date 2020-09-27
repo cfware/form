@@ -1,0 +1,37 @@
+{
+	"name": "@cfware/form",
+	"version": "0.1.0",
+	"description": "Form routines and base class",
+	"type": "module",
+	"main": "form.js",
+	"exports": "./form.js",
+	"scripts": {
+		"test": "cfware-lint ."
+	},
+	"engines": {
+		"node": ">=14.0.0"
+	},
+	"author": "Corey Farrell",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/cfware/form.git"
+	},
+	"bugs": {
+		"url": "https://github.com/cfware/form/issues"
+	},
+	"homepage": "https://github.com/cfware/form#readme",
+	"dependencies": {
+		"@cfware/event-blocker": "^0.1.0",
+		"@cfware/history-state": "^0.4.4",
+		"@cfware/shadow-element": "^0.15.0",
+		"@cfware/symbols": "^0.1.0"
+	},
+	"peerDependencies": {
+		"@cfware/icons": "*"
+	},
+	"devDependencies": {
+		"@cfware/icons": "file:pkgs/@cfware/icons",
+		"@cfware/lint": "^2.0.3"
+	}
+}
