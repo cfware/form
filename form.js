@@ -51,6 +51,7 @@ export const [
 	formResetLabel,
 	formResetCallback,
 	formSubmitLabel,
+	formIsDirty,
 	formDirtySelector
 ] = Symbols;
 
@@ -501,8 +502,12 @@ export default class FormWrapper extends ShadowElement {
 		return typeof this.objectID !== 'undefined';
 	}
 
+	[formIsDirty](submitData, originalData) {
+		return !objectsEqual(submitData, originalData);
+	}
+
 	_updateDirty(value = this._blockButtons) {
-		const disable = value || !this._data || objectsEqual(this[formSubmitData], this._data);
+		const disable = value || !this._data || !this[formIsDirty](this[formSubmitData], this._data);
 		for (const element of this._form.current.querySelectorAll(this[formDirtySelector])) {
 			element.disabled = disable;
 		}
