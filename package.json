@@ -1,6 +1,6 @@
 {
 	"name": "@cfware/form",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Form routines and base class",
 	"type": "module",
 	"main": "form.js",
