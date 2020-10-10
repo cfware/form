@@ -3,7 +3,7 @@ import historyState from '@cfware/history-state';
 import Symbols from '@cfware/symbols';
 import {blockEvent} from '@cfware/event-blocker';
 
-import '@cfware/icons';
+import '@cfware-app/icons';
 
 function objectsEqual(object1, object2) {
 	if (object1 === null || object2 === null) {
