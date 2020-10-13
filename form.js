@@ -3,7 +3,7 @@ import historyState from '@cfware/history-state';
 import Symbols from '@cfware/symbols';
 import {blockEvent} from '@cfware/event-blocker';
 
-import '@cfware-app/icons';
+import '@cfware-app/icon';
 
 function objectsEqual(object1, object2) {
 	if (object1 === null || object2 === null) {
@@ -55,14 +55,14 @@ export const [
 	formDirtySelector
 ] = Symbols;
 
-function inputTemplated(label, icons, template) {
-	const iconsTemplate = icons ? html`<cfware-icons>${icons}</cfware-icons>` : '';
+function inputTemplated(label, icon, template) {
+	const iconTemplate = icon ? html`<cfware-icon icon=${icon} />` : '';
 
 	return html`
 		<label class=field>${label}
 			<div>
 				${template}
-				${iconsTemplate}
+				${iconTemplate}
 			</div>
 		</label>
 	`;
@@ -132,8 +132,8 @@ export function singleFileUploader(name, accept, required, onchange) {
 	return html`
 		${fileInput}
 		${readOnly}
-		<cfware-icons upload onclick=${click}>\uF093</cfware-icons>
-		<cfware-icons remove right onclick=${clear}>\uF00D</cfware-icons>
+		<cfware-icon icon="\uF093" upload onclick=${click} />
+		<cfware-icon icon="\uF00D" remove right onclick=${clear} />
 	`;
 }
 
@@ -251,7 +251,7 @@ export function formSharedStyle() {
 				border-color: #FF5D9080;
 			}
 
-			.field > div > cfware-icons[right] ~ input {
+			.field > div > cfware-icon[right] ~ input {
 				padding-right: 2.5rem;
 			}
 
@@ -307,7 +307,7 @@ export function formSharedStyle() {
 				width: 100%;
 			}
 
-			.field > div > cfware-icons {
+			.field > div > cfware-icon {
 				position: absolute;
 				top: .75rem;
 				left: .3rem;
@@ -317,16 +317,16 @@ export function formSharedStyle() {
 				text-align: center;
 			}
 
-			.field > div > cfware-icons[right] {
+			.field > div > cfware-icon[right] {
 				left: unset;
 				right: .3rem;
 			}
 
-			.field > div > input:invalid ~ cfware-icons {
+			.field > div > input:invalid ~ cfware-icon {
 				color: #FF5D90;
 			}
 
-			.field > div > input:focus ~ cfware-icons {
+			.field > div > input:focus ~ cfware-icon {
 				opacity: 1;
 			}
 

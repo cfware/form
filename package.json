@@ -28,10 +28,10 @@
 		"@cfware/symbols": "^0.1.0"
 	},
 	"peerDependencies": {
-		"@cfware-app/icons": "*"
+		"@cfware-app/icon": "*"
 	},
 	"devDependencies": {
-		"@cfware-app/icons": "file:pkgs/@cfware-app/icons",
+		"@cfware-app/icon": "file:pkgs/icon",
 		"@cfware/lint": "^2.0.3"
 	}
 }
