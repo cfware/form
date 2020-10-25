@@ -55,11 +55,12 @@ export const [
 	formDirtySelector
 ] = Symbols;
 
-function inputTemplated(label, icon, template) {
+function inputTemplated(label, icon, template, moreClass) {
 	const iconTemplate = icon ? html`<cfware-icon icon=${icon} />` : '';
+	const className = [].concat('field', moreClass || []).join(' ');
 
 	return html`
-		<label class=field>${label}
+		<label class=${className}>${label}
 			<div>
 				${template}
 				${iconTemplate}
@@ -199,6 +200,10 @@ export function formSharedStyle() {
 				color: #222;
 				font-size: .875rem;
 				user-select: none;
+			}
+
+			.field.spantwo {
+				grid-column: span 2;
 			}
 
 			.field > div {
