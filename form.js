@@ -425,9 +425,23 @@ export default class FormWrapper extends ShadowElement {
 		return this._form.current.checkValidity();
 	}
 
+	_invalidTagger(valid) {
+		const form = this._form.current;
+		for (const invalidTagger of form?.querySelectorAll('[tag-invalid]')) {
+			const tag = form.querySelector(invalidTagger.getAttribute('tag-invalid'));
+			if (valid || !invalidTagger.querySelector(':invalid')) {
+				tag.removeAttribute('invalid');
+			} else {
+				tag.setAttribute('invalid', '');
+			}
+		}
+	}
+
 	checkValidity() {
 		const valid = this._internalValidity();
 		this._updateDirty(!valid);
+		this._invalidTagger(valid);
+
 		return valid;
 	}
 
@@ -522,6 +536,7 @@ export default class FormWrapper extends ShadowElement {
 		if (this._data) {
 			setTimeout(() => {
 				this._updateDirty();
+				this._invalidTagger();
 
 				const autoFocus = this[formAutoFocus] && this._form.current.querySelector(this[formAutoFocus]);
 				if (autoFocus) {
