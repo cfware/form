@@ -222,8 +222,7 @@ export function formSharedStyle() {
 				vertical-align: top;
 			}
 
-			.field > div > input:not([type=checkbox]),
-			.field > div > textarea {
+			.field > div > [name]:not([type=checkbox]) {
 				display: inline-block;
 				position: relative;
 				width: 100%;
@@ -238,22 +237,12 @@ export function formSharedStyle() {
 				opacity: .8;
 			}
 
-			.field select {
-				border-top-left-radius: .4rem;
-				border-bottom-left-radius: .4rem;
-				padding: .25rem;
-				border: 1px solid #005D9080;
-				opacity: .8;
-			}
-
-			.field select:focus {
-				opacity: 1;
-				box-shadow: .3rem 0 0 0 #005D9066 inset;
-			}
-
-			.field select:invalid {
-				box-shadow: .3rem 0 0 0 #FF5D9066 inset;
-				border-color: #FF5D9080;
+			.field > div > select {
+				/* Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) */
+				background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"/></svg>');
+				background-repeat: no-repeat;
+				background-position: right 1rem top 50%;
+				background-size: .65em auto;
 			}
 
 			.field > div > cfware-icon[right] ~ input {
@@ -269,30 +258,30 @@ export function formSharedStyle() {
 				resize: none;
 			}
 
-			.field > div > input:focus,
-			.field > div > textarea:focus {
+			.field > div > [name]:focus {
 				opacity: 1;
 				border-top-left-radius: 0;
 				border-bottom-left-radius: 0;
 				box-shadow: .3rem 0 0 0 #005D9066 inset;
 			}
 
-			.field > div > input[disabled],
-			.field > div > textarea[disabled] {
+			.field > div > select[name]:focus {
+				border-bottom-right-radius: 0;
+			}
+
+			.field > div > [name][disabled] {
 				background-color: #888;
 				color: #fff;
 				filter: invert(75%);
 				transition: all .2s ease-in;
 			}
 
-			.field > div > input[readonly],
-			.field > div > textarea[readonly] {
+			.field > div > [name][readonly] {
 				background-color: #888;
 				color: #222;
 			}
 
-			.field > div > input:invalid,
-			.field > div > textarea:invalid {
+			.field > div > [name]:invalid {
 				box-shadow: .3rem 0em 0em 0em #FF5D9066 inset;
 				border-color: #FF5D9080;
 			}
