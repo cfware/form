@@ -55,7 +55,7 @@ export const [
 	formDirtySelector
 ] = Symbols;
 
-function inputTemplated(label, icon, template, moreClass) {
+export function inputTemplated(label, icon, template, moreClass) {
 	const iconTemplate = icon ? html`<cfware-icon icon=${icon} />` : '';
 	const className = [].concat('field', moreClass || []).join(' ');
 
