@@ -202,7 +202,7 @@ export function formSharedStyle() {
 				user-select: none;
 			}
 
-			.field.spantwo {
+			.spantwo {
 				grid-column: span 2;
 			}
 
@@ -222,7 +222,8 @@ export function formSharedStyle() {
 				vertical-align: top;
 			}
 
-			.field > div > [name]:not([type=checkbox]) {
+			.field > div > [name]:not([type=checkbox]),
+			.field > div > [file] {
 				display: inline-block;
 				position: relative;
 				width: 100%;
@@ -250,7 +251,7 @@ export function formSharedStyle() {
 			}
 
 			.field > div > input[hidden] {
-				display: none;
+				display: none!important;
 			}
 
 			.field > div > textarea {
@@ -258,7 +259,8 @@ export function formSharedStyle() {
 				resize: none;
 			}
 
-			.field > div > [name]:focus {
+			.field > div > [name]:focus,
+			.field > div > [file]:focus {
 				opacity: 1;
 				border-top-left-radius: 0;
 				border-bottom-left-radius: 0;
@@ -269,19 +271,22 @@ export function formSharedStyle() {
 				border-bottom-right-radius: 0;
 			}
 
-			.field > div > [name][disabled] {
+			.field > div > [name][disabled],
+			.field > div > [file][disabled] {
 				background-color: #888;
 				color: #fff;
 				filter: invert(75%);
 				transition: all .2s ease-in;
 			}
 
-			.field > div > [name][readonly] {
+			.field > div > [name][readonly],
+			.field > div > [file][readonly] {
 				background-color: #888;
 				color: #222;
 			}
 
-			.field > div > [name]:invalid {
+			.field > div > [name]:invalid,
+			.field > div > [file]:invalid {
 				box-shadow: .3rem 0em 0em 0em #FF5D9066 inset;
 				border-color: #FF5D9080;
 			}
@@ -299,6 +304,8 @@ export function formSharedStyle() {
 				font-size: 1.25rem;
 				background: transparent;
 				width: 100%;
+				user-select: none;
+				cursor: default;
 			}
 
 			.field > div > cfware-icon {
