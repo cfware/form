@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/cfware/form/compare/v0.3.0...v0.3.1) (2020-10-30)
+
+
+### Features
+
+* Add support for CSS attribute no-icons ([42b321b](https://github.com/cfware/form/commit/42b321bfdbfa0a7fb780289eb287cc55339c3dea))
+* Add support for moreClass parameter to inputTemplates ([1f06190](https://github.com/cfware/form/commit/1f06190416c2d8e171881a9ea366fde02517d6b0))
+* Add tag-invalid attribute ([6ddc4a4](https://github.com/cfware/form/commit/6ddc4a41b33038dc576297e4555fc2bb8a4d40ef))
+* Export inputTemplated function ([9a2c6ec](https://github.com/cfware/form/commit/9a2c6ecc52d7658b334179f195e4e186ea9981f5))
+* Style for select field ([93d6d99](https://github.com/cfware/form/commit/93d6d991dfd06a521b2a6fbe16eca12252277b92))
+
 ## [0.3.0](https://github.com/cfware/form/compare/v0.2.0...v0.3.0) (2020-10-13)
 
 
