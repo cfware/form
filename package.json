@@ -23,7 +23,7 @@
 	"homepage": "https://github.com/cfware/form#readme",
 	"dependencies": {
 		"@cfware/event-blocker": "^0.1.0",
-		"@cfware/history-state": "^0.4.4",
+		"@cfware/history-state": "^0.5.0",
 		"@cfware/shadow-element": "^0.16.0",
 		"@cfware/symbols": "^0.1.0"
 	},
