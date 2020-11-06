@@ -1,11 +1,11 @@
-import ShadowElement, {html, htmlNode, template, renderCallback} from '@cfware/shadow-element';
+import ShadowElement, {html, htmlNode, booleanAttribute, template, renderCallback} from '@cfware/shadow-element';
 import historyState from '@cfware/history-state';
 import Symbols from '@cfware/symbols';
 import {blockEvent} from '@cfware/event-blocker';
 
 import '@cfware-app/icon';
 
-function objectsEqual(object1, object2) {
+const objectsEqual = (object1, object2) => {
 	if (object1 === null || object2 === null) {
 		return object1 === null && object2 === null;
 	}
@@ -36,7 +36,7 @@ function objectsEqual(object1, object2) {
 	}
 
 	return true;
-}
+};
 
 export const [
 	formCustomValidity,
@@ -55,7 +55,7 @@ export const [
 	formDirtySelector
 ] = Symbols;
 
-export function inputTemplated(label, icon, template, moreClass) {
+export const inputTemplated = (label, icon, template, moreClass) => {
 	const iconTemplate = icon ? html`<cfware-icon icon=${icon} />` : '';
 	const className = [].concat('field', moreClass || []).join(' ');
 
@@ -67,17 +67,17 @@ export function inputTemplated(label, icon, template, moreClass) {
 			</div>
 		</label>
 	`;
-}
+};
 
 export const inputsTemplated = inputs => inputs.map(input => inputTemplated(...input));
 
-export function checkbox(name, checked, label, onchange) {
+export const checkbox = (name, checked, label, onchange) => {
 	const input = htmlNode`
 		<input
 			name=${name}
 			type=checkbox
 			disabled
-			.checked=${checked}
+			checked=${booleanAttribute(checked)}
 			tabindex=-1
 			onchange=${() => onchange?.(input)}
 			onclick=${() => span.focus()}
@@ -96,9 +96,9 @@ export function checkbox(name, checked, label, onchange) {
 	`;
 
 	return span;
-}
+};
 
-export function singleFileUploader(name, accept, required, onchange) {
+export const singleFileUploader = (name, accept, required, onchange) => {
 	const click = () => {
 		fileInput.click();
 		setTimeout(() => readOnly.focus());
@@ -128,7 +128,7 @@ export function singleFileUploader(name, accept, required, onchange) {
 	};
 
 	const fileInput = htmlNode`<input name=${name} type=file accept=${accept} disabled hidden onchange=${change} />`;
-	const readOnly = htmlNode`<input file .required=${required} onclick=${click} onkeyup=${keyup} onkeypress=${blockEvent} onpaste=${blockEvent} />`;
+	const readOnly = htmlNode`<input file required=${booleanAttribute(required)} onclick=${click} onkeyup=${keyup} onkeypress=${blockEvent} onpaste=${blockEvent} />`;
 
 	return html`
 		${fileInput}
@@ -136,9 +136,9 @@ export function singleFileUploader(name, accept, required, onchange) {
 		<cfware-icon icon="\uF093" upload onclick=${click} />
 		<cfware-icon icon="\uF00D" remove right onclick=${clear} />
 	`;
-}
+};
 
-export function validationErrorLabel(value, reference) {
+export const validationErrorLabel = (value, reference) => {
 	return html`
 		<input
 			error-label
@@ -150,7 +150,7 @@ export function validationErrorLabel(value, reference) {
 			onpaste=${blockEvent}
 		/>
 	`;
-}
+};
 
 const inputTypeField = {
 	number: 'valueAsNumber',
@@ -158,218 +158,214 @@ const inputTypeField = {
 	file: 'files'
 };
 
-export function getElementValue(element) {
-	return element[inputTypeField[element.type] ?? 'value'];
-}
+export const getElementValue = element => element[inputTypeField[element.type] ?? 'value'];
 
-export function formSharedStyle() {
-	return html`
-		<style>
-			form {
-				display: grid;
-				grid-template-rows: minmax(100px, auto) 1fr auto;
-				overflow: hidden;
-				padding: 1rem 0 0;
-			}
+export const formSharedStyle = () => (html`
+	<style>
+		form {
+			display: grid;
+			grid-template-rows: minmax(100px, auto) 1fr auto;
+			overflow: hidden;
+			padding: 1rem 0 0;
+		}
 
-			form > div.buttons {
-				display: grid;
-				grid-auto-flow: column;
-				grid-template-columns: 1fr;
-				padding: .5rem 1rem;
-			}
+		form > div.buttons {
+			display: grid;
+			grid-auto-flow: column;
+			grid-template-columns: 1fr;
+			padding: .5rem 1rem;
+		}
 
-			form > div:not(.space):not(.buttons) {
-				padding: 0 1rem;
-			}
+		form > div:not(.space):not(.buttons) {
+			padding: 0 1rem;
+		}
 
-			form > div.form {
-				overflow: auto;
-			}
+		form > div.form {
+			overflow: auto;
+		}
 
-			form div.form {
-				display: grid;
-				grid-gap: 1rem;
-			}
+		form div.form {
+			display: grid;
+			grid-gap: 1rem;
+		}
 
-			div.form.twocol {
-				grid-template-columns: auto auto;
-			}
+		div.form.twocol {
+			grid-template-columns: auto auto;
+		}
 
-			.field {
-				color: #222;
-				font-size: .875rem;
-				user-select: none;
-			}
+		.field {
+			color: #222;
+			font-size: .875rem;
+			user-select: none;
+		}
 
-			.spantwo {
-				grid-column: span 2;
-			}
+		.spantwo {
+			grid-column: span 2;
+		}
 
-			.field > div {
-				margin: 1px 0;
-				display: block;
-				position: relative;
-				font-size: 1.25rem;
-			}
+		.field > div {
+			margin: 1px 0;
+			display: block;
+			position: relative;
+			font-size: 1.25rem;
+		}
 
-			.field > div > span {
-				font-size: 1rem;
-				padding-right: .2rem;
-			}
+		.field > div > span {
+			font-size: 1rem;
+			padding-right: .2rem;
+		}
 
-			.field > div > span > input[type=checkbox] {
-				vertical-align: top;
-			}
+		.field > div > span > input[type=checkbox] {
+			vertical-align: top;
+		}
 
-			.field > div > [name]:not([type=checkbox]),
-			.field > div > [file] {
-				display: inline-block;
-				position: relative;
-				width: 100%;
-				outline: 0;
-				border-radius: .4rem;
-				-webkit-appearance: none;
-				box-sizing: border-box;
-				margin-top: .1rem;
-				padding: .75rem;
-				padding-left: 2.5rem;
-				border: 1px solid #005D9080;
-				opacity: .8;
-			}
+		.field > div > [name]:not([type=checkbox]),
+		.field > div > [file] {
+			display: inline-block;
+			position: relative;
+			width: 100%;
+			outline: 0;
+			border-radius: .4rem;
+			-webkit-appearance: none;
+			box-sizing: border-box;
+			margin-top: .1rem;
+			padding: .75rem;
+			padding-left: 2.5rem;
+			border: 1px solid #005D9080;
+			opacity: .8;
+		}
 
-			[no-icons] .field > div > [name]:not([type=checkbox]),
-			[no-icons] .field > div > [file] {
-				padding-left: 1rem;
-			}
+		[no-icons] .field > div > [name]:not([type=checkbox]),
+		[no-icons] .field > div > [file] {
+			padding-left: 1rem;
+		}
 
-			.field > div > select {
-				/* Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) */
-				background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"/></svg>');
-				background-repeat: no-repeat;
-				background-position: right 1rem top 50%;
-				background-size: .65em auto;
-			}
+		.field > div > select {
+			/* Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) */
+			background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"/></svg>');
+			background-repeat: no-repeat;
+			background-position: right 1rem top 50%;
+			background-size: .65em auto;
+		}
 
-			.field > div > cfware-icon[right] ~ input {
-				padding-right: 2.5rem;
-			}
+		.field > div > cfware-icon[right] ~ input {
+			padding-right: 2.5rem;
+		}
 
-			.field > div > input[hidden] {
-				display: none!important;
-			}
+		.field > div > input[hidden] {
+			display: none!important;
+		}
 
-			.field > div > textarea {
-				height: 11rem;
-				resize: none;
-			}
+		.field > div > textarea {
+			height: 11rem;
+			resize: none;
+		}
 
-			.field > div > [name]:focus,
-			.field > div > [file]:focus {
-				opacity: 1;
-				border-top-left-radius: 0;
-				border-bottom-left-radius: 0;
-				box-shadow: .3rem 0 0 0 #005D9066 inset;
-			}
+		.field > div > [name]:focus,
+		.field > div > [file]:focus {
+			opacity: 1;
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+			box-shadow: .3rem 0 0 0 #005D9066 inset;
+		}
 
-			.field > div > select[name]:focus {
-				border-bottom-right-radius: 0;
-			}
+		.field > div > select[name]:focus {
+			border-bottom-right-radius: 0;
+		}
 
-			.field > div > [name][disabled],
-			.field > div > [file][disabled] {
-				background-color: #888;
-				color: #fff;
-				filter: invert(75%);
-				transition: all .2s ease-in;
-			}
+		.field > div > [name][disabled],
+		.field > div > [file][disabled] {
+			background-color: #888;
+			color: #fff;
+			filter: invert(75%);
+			transition: all .2s ease-in;
+		}
 
-			.field > div > [name][readonly],
-			.field > div > [file][readonly] {
-				background-color: #888;
-				color: #222;
-			}
+		.field > div > [name][readonly],
+		.field > div > [file][readonly] {
+			background-color: #888;
+			color: #222;
+		}
 
-			.field > div > [name]:invalid,
-			.field > div > [file]:invalid {
-				box-shadow: .3rem 0em 0em 0em #FF5D9066 inset;
-				border-color: #FF5D9080;
-			}
+		.field > div > [name]:invalid,
+		.field > div > [file]:invalid {
+			box-shadow: .3rem 0em 0em 0em #FF5D9066 inset;
+			border-color: #FF5D9080;
+		}
 
-			input[error-label]:valid {
-				display: none;
-			}
+		input[error-label]:valid {
+			display: none;
+		}
 
-			input[error-label]:invalid {
-				-webkit-appearance: none;
-				color: #FF5D90;
-				border: none!important;
-				outline: 0;
-				box-shadow: none;
-				font-size: 1.25rem;
-				background: transparent;
-				width: 100%;
-				user-select: none;
-				cursor: default;
-			}
+		input[error-label]:invalid {
+			-webkit-appearance: none;
+			color: #FF5D90;
+			border: none!important;
+			outline: 0;
+			box-shadow: none;
+			font-size: 1.25rem;
+			background: transparent;
+			width: 100%;
+			user-select: none;
+			cursor: default;
+		}
 
-			.field > div > cfware-icon {
-				position: absolute;
-				top: .75rem;
-				left: .3rem;
-				bottom: .75rem;
-				width: 2.2rem;
-				opacity: .5;
-				text-align: center;
-			}
+		.field > div > cfware-icon {
+			position: absolute;
+			top: .75rem;
+			left: .3rem;
+			bottom: .75rem;
+			width: 2.2rem;
+			opacity: .5;
+			text-align: center;
+		}
 
-			.field > div > cfware-icon[right] {
-				left: unset;
-				right: .3rem;
-			}
+		.field > div > cfware-icon[right] {
+			left: unset;
+			right: .3rem;
+		}
 
-			.field > div > input:invalid ~ cfware-icon {
-				color: #FF5D90;
-			}
+		.field > div > input:invalid ~ cfware-icon {
+			color: #FF5D90;
+		}
 
-			.field > div > input:focus ~ cfware-icon {
-				opacity: 1;
-			}
+		.field > div > input:focus ~ cfware-icon {
+			opacity: 1;
+		}
 
-			input[type=submit] {
-				display: none;
-			}
+		input[type=submit] {
+			display: none;
+		}
 
-			form button {
-				border-radius: .4rem;
-				font-size: 1rem;
-				font-weight: 700;
-				cursor: pointer;
-				padding: .8rem 1.5rem;
-				margin-left: .25rem;
-			}
+		form button {
+			border-radius: .4rem;
+			font-size: 1rem;
+			font-weight: 700;
+			cursor: pointer;
+			padding: .8rem 1.5rem;
+			margin-left: .25rem;
+		}
 
-			form button[type=submit] {
-				color: #fff;
-				background-color: #6ecff5;
-				border-color: #6ecff5;
-			}
+		form button[type=submit] {
+			color: #fff;
+			background-color: #6ecff5;
+			border-color: #6ecff5;
+		}
 
-			form button[type=submit]:hover:not([disabled]) {
-				background-color: #1AB8F3;
-			}
+		form button[type=submit]:hover:not([disabled]) {
+			background-color: #1AB8F3;
+		}
 
-			form button[disabled],
-			form:invalid button[type=submit] {
-				background-color: #888;
-				color: #222;
-				border-color: #888;
-				cursor: default;
-				transition: all .2s ease-in;
-			}
-		</style>
-	`;
-}
+		form button[disabled],
+		form:invalid button[type=submit] {
+			background-color: #888;
+			color: #222;
+			border-color: #888;
+			cursor: default;
+			transition: all .2s ease-in;
+		}
+	</style>
+`);
 
 export default class FormWrapper extends ShadowElement {
 	_form = {};

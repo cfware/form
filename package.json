@@ -24,7 +24,7 @@
 	"dependencies": {
 		"@cfware/event-blocker": "^0.1.0",
 		"@cfware/history-state": "^0.4.4",
-		"@cfware/shadow-element": "^0.15.0",
+		"@cfware/shadow-element": "^0.16.0",
 		"@cfware/symbols": "^0.1.0"
 	},
 	"peerDependencies": {
@@ -32,6 +32,6 @@
 	},
 	"devDependencies": {
 		"@cfware-app/icon": "file:pkgs/icon",
-		"@cfware/lint": "^2.0.3"
+		"@cfware/lint": "^2.0.4"
 	}
 }
