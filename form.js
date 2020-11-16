@@ -424,12 +424,11 @@ export default class FormWrapper extends ShadowElement {
 
 	_invalidTagger(valid) {
 		const form = this._form.current;
-		for (const invalidTagger of form?.querySelectorAll('[tag-invalid]')) {
-			const tag = form.querySelector(invalidTagger.getAttribute('tag-invalid'));
-			if (valid || !invalidTagger.querySelector(':invalid')) {
-				tag.removeAttribute('invalid');
-			} else {
-				tag.setAttribute('invalid', '');
+		if (form) {
+			for (const invalidTagger of form.querySelectorAll('[tag-invalid]')) {
+				form
+					.querySelector(invalidTagger.getAttribute('tag-invalid'))
+					.toggleAttribute('invalid', !valid && invalidTagger.querySelector(':invalid'));
 			}
 		}
 	}
@@ -499,11 +498,7 @@ export default class FormWrapper extends ShadowElement {
 	}
 
 	set disabled(value) {
-		if (value) {
-			this.setAttribute('disabled', '');
-		} else {
-			this.removeAttribute('disabled');
-		}
+		this.toggleAttribute('disabled', value);
 
 		if (this._form.current) {
 			for (const element of this._form.current.querySelectorAll('input, textarea')) {
