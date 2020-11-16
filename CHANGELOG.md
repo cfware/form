@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.2](https://github.com/cfware/form/compare/v0.4.1...v0.4.2) (2020-11-16)
+
+
+### Bug Fixes
+
+* Handle null form in invalidTagger, use toggleAttribute ([07f3010](https://github.com/cfware/form/commit/07f301049672d5ef2c17a1ea6c75335263138ed1))
+* Use renderCallbackImmediate ([702ef91](https://github.com/cfware/form/commit/702ef91951f297e454236ae1578bca1acea74228))
+
 ### [0.4.1](https://github.com/cfware/form/compare/v0.4.0...v0.4.1) (2020-11-07)
 
 
