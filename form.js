@@ -1,4 +1,4 @@
-import ShadowElement, {html, htmlNode, booleanAttribute, template, renderCallback} from '@cfware/shadow-element';
+import ShadowElement, {html, htmlNode, booleanAttribute, template, renderCallbackImmediate} from '@cfware/shadow-element';
 import historyState from '@cfware/history-state';
 import Symbols from '@cfware/symbols';
 import {blockEvent} from '@cfware/event-blocker';
@@ -402,7 +402,7 @@ export default class FormWrapper extends ShadowElement {
 		try {
 			this.disabled = true;
 			this._data = await this[formLoad]();
-			this[renderCallback](true);
+			this[renderCallbackImmediate]();
 			this.disabled = false;
 		} catch (error) {
 			console.error(error);
