@@ -1,37 +1,37 @@
 {
-	"name": "@cfware/form",
-	"version": "0.4.2",
-	"description": "Form routines and base class",
-	"type": "module",
-	"main": "form.js",
-	"exports": "./form.js",
-	"scripts": {
-		"test": "cfware-lint ."
-	},
-	"engines": {
-		"node": ">=14.0.0"
-	},
-	"author": "Corey Farrell",
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/cfware/form.git"
-	},
-	"bugs": {
-		"url": "https://github.com/cfware/form/issues"
-	},
-	"homepage": "https://github.com/cfware/form#readme",
-	"dependencies": {
-		"@cfware/event-blocker": "^0.1.0",
-		"@cfware/history-state": "^0.5.0",
-		"@cfware/shadow-element": "^0.16.2",
-		"@cfware/symbols": "^0.1.0"
-	},
-	"peerDependencies": {
-		"@cfware-app/icon": "*"
-	},
-	"devDependencies": {
-		"@cfware-app/icon": "file:pkgs/icon",
-		"@cfware/lint": "^2.0.4"
-	}
+    "name": "@cfware/form",
+    "version": "0.4.2",
+    "description": "Form routines and base class",
+    "type": "module",
+    "main": "form.js",
+    "exports": "./form.js",
+    "scripts": {
+        "test": "cfware-lint ."
+    },
+    "engines": {
+        "node": ">=18"
+    },
+    "author": "Corey Farrell",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cfware/form.git"
+    },
+    "bugs": {
+        "url": "https://github.com/cfware/form/issues"
+    },
+    "homepage": "https://github.com/cfware/form#readme",
+    "dependencies": {
+        "@cfware/event-blocker": "^0.1",
+        "@cfware/history-state": "^1",
+        "@cfware/shadow-element": "^1",
+        "@cfware/symbols": "^1"
+    },
+    "peerDependencies": {
+        "@cfware-app/icon": "*"
+    },
+    "devDependencies": {
+        "@cfware-app/icon": "file:pkgs/icon",
+        "@cfware/lint": "^4"
+    }
 }
